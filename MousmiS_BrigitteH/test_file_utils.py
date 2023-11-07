@@ -22,3 +22,10 @@ def test_get_file_content_case02():
     actual = fu.get_file_content('mousmi.txt')
     
     assert expected == actual    
+    
+def test_write_to_file():
+    script_folder = os.path.dirname(os.path.abspath(__file__))
+    file_name = os.path.join(script_folder,"data", "TestFile.txt")
+    content = "Hello World"
+    fu.write_to_file(file_name, content)
+        
