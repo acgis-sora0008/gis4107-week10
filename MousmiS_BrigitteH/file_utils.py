@@ -18,6 +18,5 @@ def write_to_file(file_name, content):
     """
     file_name = r"data\TestFile.txt"
     with open (file_name,'w') as outfile:
-        content = outfile.write("Hello World\nHow are you?")
-        return content
+        outfile.write("Hello World")
  
