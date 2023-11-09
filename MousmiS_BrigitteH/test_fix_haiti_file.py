@@ -8,13 +8,17 @@
 # Created:     08/11/2021
 #-------------------------------------------------------------------------------
 
-import csv
 import fix_haiti_file as fh
+import os
+import csv
 
 
 def test_fix_code_typical_code():
     """Given HT12345-01, expecting HT1245-01"""
-
+    admin_code = 'HT12345-01'
+    expected = 'HT1245-01'
+    actual = fh.fix_code(admin_code)
+    assert expected == actual
 
 def test_fix_file():
     """"Haiti_Admin_Names.csv contains ADMIN_CODES in the first column
@@ -22,8 +26,18 @@ def test_fix_file():
 		TIP:  expected will be a "fixed" row of data
 		      actual will be the row extracted from the fixed file
 	"""
-	
+    expected = 'HT0552-01,Artibonite,Terre Neuve,Doland'
 
+    script_folder = os.path.dirname(os.path.abspath(__file__))
+
+    in_csv = os.path.join(script_folder,'haiti_admin_names_fixed.csv')
+    with open(in_csv) as i:
+            reader = csv.reader(i)
+            header = next(reader)
+            row_1 = next(reader)
+            actual = ','.join(row_1)
+    assert actual == expected
+                
 	## Optional:
     ## Once you have process_file "working", uncomment the 5 lines starting with
     ## file1 = ""
