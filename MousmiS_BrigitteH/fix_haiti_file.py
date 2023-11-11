@@ -31,17 +31,24 @@ def fix_file(in_csv, out_csv, admin_code_column_index = 0):
             writer.writerow(header)
             for row in reader:
                 admin_code = row[admin_code_column_index]
-                index = 4
-                new_admin_code = admin_code[0:index] + admin_code[index + 1:]
-                row[admin_code_column_index] = new_admin_code
-                writer.writerow(row)
+                if len(admin_code) == 10:
+                    index = 4
+                    new_admin_code = admin_code[0:index] + admin_code[index + 1:]
+                    row[admin_code_column_index] = new_admin_code
+                    writer.writerow(row)
+                else:
+                    return 'incorrect admin code entry'
 
 def fix_code(admin_code):
     """Returns code with 5th character removed.
     For example, given HT12345-01, return "HT1245-01"""
-    index = 4
-    new_admin_code = admin_code[0:index] + admin_code[index + 1:]
-    return new_admin_code
+    
+    if len(admin_code)==10:
+        index = 4
+        new_admin_code = admin_code[0:index] + admin_code[index + 1:]
+        return new_admin_code
+    else:
+        return 'incorrect admin code entry'
 
 
 

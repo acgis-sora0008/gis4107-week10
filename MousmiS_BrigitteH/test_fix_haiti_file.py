@@ -20,6 +20,12 @@ def test_fix_code_typical_code():
     actual = fh.fix_code(admin_code)
     assert expected == actual
 
+def test_fix_code_atypical_code():
+     admin_code = 'HT12345-011'
+     expected = 'incorrect admin code entry'
+     actual = fh.fix_code(admin_code)
+     assert expected == actual
+
 def test_fix_file():
     """"Haiti_Admin_Names.csv contains ADMIN_CODES in the first column
         Haiti_Admin_Names_fixed.csv contains a fixed version. 
