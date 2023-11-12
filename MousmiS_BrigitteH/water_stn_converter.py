@@ -1,4 +1,6 @@
 # ------------------------------------------------------------------------------
+
+
 # Name:        water_stn_converter.py
 #
 # Purpose:
@@ -30,6 +32,8 @@
 # ------------------------------------------------------------------------------
 
 import json
+import csv
+
 
 in_json_filename = 'data/water_stn.json'
 out_csv_filename = ''
@@ -38,55 +42,101 @@ out_kml_filename = ''
 def json_to_csv():
     """Converts a JSON file created using the water_stn_downloader module
     to CSV"""
-
     # Call load_json_file_to_dict()
-    #
-
     # Use with to open out_csv_filename
-    #
+    # Open csv file for writing
+    # Write the header to the CSV file
+    # Loop through all the features and write the results to the CSV file
+    with open (in_json_filename) as f:
+        list1 = []
+        data = json.loads(f.read(in_json_filename))
+        temp = data[0]
+        header_items = []
+        get_header_items(header_items, temp)
+        list1.append(header_items)
+        
+        for object in data:
+            d = []
+            add_items_to_data(d, object)
+            list1.append(d)
+        print(list1)
+        
+        with open('output.csv', "w") as out_csv_filename:
+            for a in list1:
+                out_csv_filename.write(','.join(map(str, a)) + "\r")    
+        
+    def get_header_items(items, object):
+       for x in object: 
+           if isinstance(object[x], dict):
+               items.append(x)
+               get_header_items(items, object[x])    
+           else:
+               items.append(x)  
+               
+               
+    def add_items_to_data(items, object):
+       for x in object: 
+           if isinstance(object[x], dict):
+               items.append("")
+               get_header_items(items, object[x])    
+           else:
+               items.append(object[x])  
+                
+    json_to_csv() 
+              
+               
+               
+       
+    
+    
 
-        # Write the header to the CSV file
-        #
+ 
+         
+
+    
+ 
+                
 
 
-        # Loop through all the features and write the results to the CSV file
-        #
+        
+        
+            
 
 
-def json_to_kml():
-    """Converts a JSON file created using the water_stn_downloader module
-    to KML"""
+# def json_to_kml():
+#     """Converts a JSON file created using the water_stn_downloader module
+#     to KML"""
 
 
-def load_json_file_to_dict():
-    """Use json.load(file_object) to convert the contents of in_json_filename
-    to a Python dictionary.  Return the resulting dictionary.
-    """
-    # Use with to open in_json_filename and use that file object as an
-    # argument to json.load.  This will return a Python dict with nested
-    # lists and dictionaries
+# def load_json_file_to_dict():
+#     """Use json.load(file_object) to convert the contents of in_json_filename
+#     to a Python dictionary.  Return the resulting dictionary.
+#     """
+#     # Use with to open in_json_filename and use that file object as an
+#     # argument to json.load.  This will return a Python dict with nested
+#     # lists and dictionaries
 
 
-def get_values_from_feature(feature):
-    """Given a dictionary of feature attributes, return the following:
-        Station_Number, Station_name, Longitude, Latitude  """
+# def get_values_from_feature(feature):
+#     """Given a dictionary of feature attributes, return the following:
+#         Station_Number, Station_name, Longitude, Latitude  """
 
 
-def get_wateroffice_link(station_number):
-    """Given a station_number, return the English wateroffice link"""
+# def get_wateroffice_link(station_number):
+#     """Given a station_number, return the English wateroffice link"""
 
 
-def get_kml_header():
-    """Return the xml header including the Document start tag
-    """
+# def get_kml_header():
+#     """Return the xml header including the Document start tag
+#     """
 
 
-def get_kml_footer():
-    """Return the document and kml end tags
-    """
+# def get_kml_footer():
+#     """Return the document and kml end tags
+#     """
 
 
-def get_placemark(name, longitude, latitude, wateroffice_link):
-    """Return the KML Placemark element including start and end tags
-    """
+# def get_placemark(name, longitude, latitude, wateroffice_link):
+#     """Return the KML Placemark element including start and end tags
+#     """
 

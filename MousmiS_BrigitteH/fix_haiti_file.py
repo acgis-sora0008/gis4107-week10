@@ -23,6 +23,7 @@ def fix_file(in_csv, out_csv, admin_code_column_index = 0):
     in_csv = os.path.join(script_folder, r'data\Haiti_Admin_Names.csv')
     out_csv = os.path.join(script_folder, 'haiti_admin_names_fixed.csv')
     
+    
     with open(out_csv, 'w', newline= '') as o:
         writer = csv.writer(o)
         with open(in_csv) as i:
@@ -36,12 +37,14 @@ def fix_file(in_csv, out_csv, admin_code_column_index = 0):
                 row[admin_code_column_index] = new_admin_code
                 writer.writerow(row)
 
-def fix_code(admin_code):
-    """Returns code with 5th character removed.
-    For example, given HT12345-01, return "HT1245-01"""
-    index = 4
-    new_admin_code = admin_code[0:index] + admin_code[index + 1:]
-    return new_admin_code
+    def fix_code(admin_code):
+        """Returns code with 5th character removed.
+        For example, given HT12345-01, return "HT1245-01"""
+        index = 4
+        new_admin_code = admin_code[0:index] + admin_code[index + 1:]
+        print(new_admin_code)
+        
+    fix_code(admin_code)    
 
 
 
