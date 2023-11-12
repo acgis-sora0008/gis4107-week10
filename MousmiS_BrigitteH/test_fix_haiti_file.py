@@ -21,10 +21,11 @@ def test_fix_code_typical_code():
     assert expected == actual
 
 def test_fix_code_atypical_code():
-     admin_code = 'HT12345-011'
-     expected = 'incorrect admin code entry'
-     actual = fh.fix_code(admin_code)
-     assert expected == actual
+    """Given incorrect admin code, expecting error message"""
+    admin_code = 'HT12345-01234'
+    expected = 'incorrect admin code entry'
+    actual = fh.fix_code(admin_code)
+    assert expected == actual
 
 def test_fix_file():
     """"Haiti_Admin_Names.csv contains ADMIN_CODES in the first column
@@ -32,7 +33,7 @@ def test_fix_file():
 		TIP:  expected will be a "fixed" row of data
 		      actual will be the row extracted from the fixed file
 	"""
-    expected = 'HT0552-01,Artibonite,Terre Neuve,Doland'
+    expected = 'HT0522-01,Artibonite,Terre Neuve,Doland'
 
     script_folder = os.path.dirname(os.path.abspath(__file__))
 
